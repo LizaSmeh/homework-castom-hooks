@@ -1,33 +1,14 @@
-import "./App.css";
-import { useFetch } from './hooks/useFetch'
+import { useViewportSize } from './hooks/useViewportSize'
+import './App.css'
 
 function App() {
-  const { data, isLoading, error, refetch } = useFetch(
-    "https://jsonplaceholder.typicode.com/posts"
-  );
+  const { height, width } = useViewportSize();
 
   return (
-    <div>
-      <div>
-        <button
-          onClick={() =>
-            refetch({
-              params: {
-                _limit: 3,
-              },
-            })
-          }
-        >
-          Перезапросить
-        </button>
-      </div>
-      {isLoading && "Загрузка..."}
-      {error && "Произошла ошибка"}
-      {data &&
-        !isLoading &&
-        data.map((item) => <div key={item.id}>{item.title}</div>)}
-    </div>
+    <>
+      Width: {width}, height: {height}
+    </>
   );
 }
 
-export default App;
+export default App
